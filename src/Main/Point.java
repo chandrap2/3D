@@ -12,7 +12,8 @@ package Main;
 
 import processing.core.*;
 
-public class Point {
+public class Point
+{
     private float x, y, z;
     private float screenX, screenY;
     private float perspectiveRatio;
