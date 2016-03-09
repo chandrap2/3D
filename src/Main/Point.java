@@ -38,6 +38,11 @@ public class Point
         this.z = 0;
     }
     
+    public static float getFocalLength()
+    {
+        return FOCAL_LENGTH;
+    }
+    
     public void display(PApplet applet)
     {
         screenX = pointToScreen()[0];
@@ -46,21 +51,25 @@ public class Point
         applet.rect(screenX, screenY, pointSizePerspective, pointSizePerspective);
     }
     
-    public void rotateX()
+    public void rotateX(float radius, float angle, float x, float y, float z)
     {
-        
-    }
+        this.x = x;
+        this.y = (float) Math.sin(angle) * radius + y;
+        this.z = (float) Math.cos(angle) * radius + z;
+    }    
     
-    public void rotateY()
+    public void rotateY(float radius, float angle, float x, float y, float z)
     {
-        
+        this.x = (float) Math.cos(angle) * radius + x;
+        this.y = y;
+        this.z = (float) Math.sin(angle) * radius + z;
     }
     
     public void rotateZ(float radius, float angle, float x, float y, float z)
     {
         this.x = (float) Math.cos(angle) * radius + x;
-        this.y = y;
-        this.z = (float) Math.sin(angle) * radius + z;
+        this.y = (float) Math.sin(angle) * radius + y;
+        this.z = z;
     }
     
     public void translateX(float xTranslate)

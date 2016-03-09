@@ -34,14 +34,17 @@ public class MySketch extends PApplet
     public void draw()
     {
         background(0);
-        line(width / 2, 0, width / 2, height);
+        stroke(255);
+        fill(255);
         
-        point1.rotateZ(200, angle, 0, 100, 600);
+        point1.rotateY(200, angle, 0, 0, 200);
         point1.display(this);
         
-        point2.rotateZ(600, angle, 0, 100, 600);
+        point2.rotateX(200, angle, 0, 0, 200);
         point2.display(this);
         
-        angle += TWO_PI / 180;
+        stroke(255);
+        
+        angle += TWO_PI / 720;
     }
 }
