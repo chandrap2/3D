@@ -13,6 +13,6 @@ public class Main
 {
     public static void main(String[] args)
     {
-        MySketch.main("Main.MySketch2");
+        MySketch.main("Main.MySketch");
     }    
 }

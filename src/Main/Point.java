@@ -20,7 +20,7 @@ public class Point
     private float pointSizePerspective;
     
     private static final float FOCAL_LENGTH = 200;
-    private static final float POINT_SIZE = 15;
+    private static final float POINT_SIZE = 25;
     private static final float ORIGIN_X = 960;
     private static final float ORIGIN_Y = 540;
     
@@ -29,6 +29,13 @@ public class Point
         this.x = x;
         this.y = y;
         this.z = z;
+    }
+    
+    public Point()
+    {
+        this.x = 0;
+        this.y = 0;
+        this.z = 0;
     }
     
     public void display(PApplet applet)
@@ -49,9 +56,11 @@ public class Point
         
     }
     
-    public void rotateZ()
+    public void rotateZ(float radius, float angle, float x, float y, float z)
     {
-        
+        this.x = (float) Math.cos(angle) * radius + x;
+        this.y = y;
+        this.z = (float) Math.sin(angle) * radius + z;
     }
     
     public void translateX(float xTranslate)
