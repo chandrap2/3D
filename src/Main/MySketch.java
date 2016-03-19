@@ -14,10 +14,8 @@ import processing.core.*;
 
 public class MySketch extends PApplet
 {
-    Point point1 = new Point();
-    Point point2 = new Point();
-    
-    float angle = 0;
+    Point point = new Point();
+    Point point2 = new Point(300, 200, 0);
     
     public void settings()
     {
@@ -34,17 +32,23 @@ public class MySketch extends PApplet
     public void draw()
     {
         background(0);
-        stroke(255);
-        fill(255);
-        
-        point1.rotateY(200, angle, 0, 0, 200);
-        point1.display(this);
-        
-        point2.rotateX(200, angle, 0, 0, 200);
+        point.display(this);
         point2.display(this);
         
-        stroke(255);
+        if (keyPressed)
+        {
+            if (keyCode == UP || keyCode == DOWN)
+            {
+                Camera.translateY(keyCode == UP ? 3 : -3);
+            }
+            
+            if (keyCode == RIGHT || keyCode == LEFT)
+            {
+                Camera.translateX(keyCode == RIGHT ? 3 : -3);
+            }
+        }
         
-        angle += TWO_PI / 720;
+        if (mousePressed && mouseButton == LEFT) Camera.translateZ(3);
+        if (mousePressed && mouseButton == RIGHT) Camera.translateZ(-3);
     }
 }

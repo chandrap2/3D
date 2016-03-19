@@ -90,10 +90,10 @@ public class Point
     private float[] pointToScreen()
     {
         float[] coordinates = new float[3];
-        perspectiveRatio = FOCAL_LENGTH / (FOCAL_LENGTH + z);
+        perspectiveRatio = FOCAL_LENGTH / (FOCAL_LENGTH + (Camera.z - this.z));
         
-        coordinates[0] = x * perspectiveRatio + ORIGIN_X;
-        coordinates[1] = ORIGIN_Y - y * perspectiveRatio;
+        coordinates[0] = (this.x - Camera.x) * perspectiveRatio + ORIGIN_X;
+        coordinates[1] = ORIGIN_Y - (this.y - Camera.y) * perspectiveRatio;
         coordinates[2] = POINT_SIZE * perspectiveRatio;
         
         return coordinates;
