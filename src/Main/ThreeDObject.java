@@ -9,12 +9,13 @@ package Main;
  *
  * @author s-pandianc
  */
-public class PointGroup
-{
-    Point[] points;
+public class ThreeDObject {
+    protected float[] positionCoordinates = new float[3];
     
-    public PointGroup(Point... points)
+    public ThreeDObject(float x, float y, float z)
     {
-        this.points = points;
+        positionCoordinates[0] = x;
+        positionCoordinates[1] = y;
+        positionCoordinates[2] = z;
     }
 }

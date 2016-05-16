@@ -12,90 +12,64 @@ package Main;
 
 import processing.core.*;
 
-public class Point
+public class Point extends ThreeDObject implements BasicMethods
 {
-    private float x, y, z;
-    private float screenX, screenY;
-    private float perspectiveRatio;
-    private float pointSizePerspective;
-    
-    private static final float FOCAL_LENGTH = 200;
-    private static final float POINT_SIZE = 25;
-    private static final float ORIGIN_X = 960;
-    private static final float ORIGIN_Y = 540;
+    public Point()
+    {
+        super(0, 0, 0);
+    }
     
     public Point(float x, float y, float z)
     {
-        this.x = x;
-        this.y = y;
-        this.z = z;
-    }
-    
-    public Point()
-    {
-        this.x = 0;
-        this.y = 0;
-        this.z = 0;
-    }
-    
-    public static float getFocalLength()
-    {
-        return FOCAL_LENGTH;
+        super(x, y, z);
     }
     
     public void display(PApplet applet)
     {
-        screenX = pointToScreen()[0];
-        screenY = pointToScreen()[1];
-        pointSizePerspective = pointToScreen()[2];
-        applet.rect(screenX, screenY, pointSizePerspective, pointSizePerspective);
+        if (Camera.positionCameraFrame(this.getX(), this.getY(), this.getZ())[2] >= 0)
+        {
+            float x = this.getX();
+            float y = this.getY();
+            float z = this.getZ();
+
+            float screenX = Camera.project(x, y, z)[0];
+            float screenY = Camera.project(x, y, z)[1];
+
+            applet.point(screenX, screenY);
+        }
     }
     
-    public void rotateX(float radius, float angle, float x, float y, float z)
+    public float getX()
     {
-        this.x = x;
-        this.y = (float) Math.sin(angle) * radius + y;
-        this.z = (float) Math.cos(angle) * radius + z;
-    }    
-    
-    public void rotateY(float radius, float angle, float x, float y, float z)
-    {
-        this.x = (float) Math.cos(angle) * radius + x;
-        this.y = y;
-        this.z = (float) Math.sin(angle) * radius + z;
+        return positionCoordinates[0];
     }
     
-    public void rotateZ(float radius, float angle, float x, float y, float z)
+    public float getY()
     {
-        this.x = (float) Math.cos(angle) * radius + x;
-        this.y = (float) Math.sin(angle) * radius + y;
-        this.z = z;
+        return positionCoordinates[1];
     }
     
-    public void translateX(float xTranslate)
+    public float getZ()
     {
-        this.x += xTranslate;
+        return positionCoordinates[2];
     }
     
-    public void translateY(float yTranslate)
+    public float[] getPos()
     {
-        this.y += yTranslate;
+        return this.positionCoordinates;
     }
     
-    public void translateZ(float zTranslate)
+    public void translate(float translateX, float translateY, float translateZ)
     {
-        this.z += zTranslate;
+        positionCoordinates[0] += translateX;
+        positionCoordinates[1] += translateY;
+        positionCoordinates[2] += translateZ;
     }
     
-    private float[] pointToScreen()
+    public void set(float newX, float newY, float newZ)
     {
-        float[] coordinates = new float[3];
-        perspectiveRatio = FOCAL_LENGTH / (FOCAL_LENGTH + (Camera.z - this.z));
-        
-        coordinates[0] = (this.x - Camera.x) * perspectiveRatio + ORIGIN_X;
-        coordinates[1] = ORIGIN_Y - (this.y - Camera.y) * perspectiveRatio;
-        coordinates[2] = POINT_SIZE * perspectiveRatio;
-        
-        return coordinates;
+        positionCoordinates[0] = newX;
+        positionCoordinates[1] = newY;
+        positionCoordinates[2] = newZ;
     }
 }
