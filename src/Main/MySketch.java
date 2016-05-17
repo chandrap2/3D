@@ -14,15 +14,15 @@ import processing.core.*;
 
 public class MySketch extends PApplet
 {
-    Point p1 = new Point(300, 300, 0);
-    Point p2 = new Point(-300, 300, 0);
-    Point p3 = new Point(300, -300, 0);
-    Point p4 = new Point(-300, -300, 0);
+    Point p1 = new Point(300, 300, 500);
+    Point p2 = new Point(-300, 300, 500);
+    Point p3 = new Point(300, -300, 500);
+    Point p4 = new Point(-300, -300, 500);
 
-    Point p5 = new Point(300, 300, 600);
-    Point p6 = new Point(-300, 300, 600);
-    Point p7 = new Point(300, -300, 600);
-    Point p8 = new Point(-300, -300, 600);
+    Point p5 = new Point(300, 300, 1100);
+    Point p6 = new Point(-300, 300, 1100);
+    Point p7 = new Point(300, -300, 1100);
+    Point p8 = new Point(-300, -300, 1100);
     
     Edge edge1 = new Edge(p1, p2);
     Edge edge2 = new Edge(p2, p4);
@@ -57,30 +57,30 @@ public class MySketch extends PApplet
         System.out.println("2:" + Camera.getAngle());
         
         background(0);
-//        
-//        if (keyPressed)
-//        {
-//            if (keyCode == UP)
-//            {
-//                Camera.translateCameraFrameZ(2);
-//            }
-//
-//            if (keyCode == DOWN)
-//            {
-//                Camera.translateCameraFrameZ(-2);
-//            }
-//
-//            if (keyCode == LEFT)
-//            {
-//                Camera.rotate(-3);
-//            }
-//
-//            if (keyCode == RIGHT)
-//            {
-//                Camera.rotate(3);
-//            }   
-//        }
-//        
+        
+        if (keyPressed)
+        {
+            if (keyCode == UP)
+            {
+                Camera.translateCameraFrameZ(5);
+            }
+
+            if (keyCode == DOWN)
+            {
+                Camera.translateCameraFrameZ(-5);
+            }
+
+            if (keyCode == LEFT)
+            {
+                Camera.rotate(2);
+            }
+
+            if (keyCode == RIGHT)
+            {
+                Camera.rotate(-2);
+            }   
+        }
+        
         p1.display(this);
         p2.display(this);
         p3.display(this);
@@ -105,5 +105,13 @@ public class MySketch extends PApplet
         edge10.display(this);
         edge11.display(this);
         edge12.display(this);
+        
+        line(1920 - 200, 1080 - 100, 1920 - 100, 1080 - 100);
+        line(1920 - 200, 1080 - 100, 1920 - 200, 1080 - 200);
+        
+        line(1920 - 200, 1080 - 100, (float) Math.cos(Camera.getAngle() / 180 * Math.PI) * 50 + 1920 - 200, 1080 - 100 - (float) Math.sin(Camera.getAngle() / 180 * Math.PI) * 50);
+        line(1920 - 200, 1080 - 100, 1920 - 200 - (float) Math.sin(Camera.getAngle() / 180 * Math.PI) * 50, 1080 - 100 - (float) Math.cos(Camera.getAngle() / 180 * Math.PI) * 50);
+        
+        System.out.println("angle: " + Camera.getAngle());
     }
 }

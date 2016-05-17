@@ -14,9 +14,11 @@ public class Camera
     public static float x = 0;
     public static float y = 0;
     public static float z = 0;
+    
     public static float angle = 0;
     
-    private static final float FOCAL_LENGTH = 1000;
+//    private static final float FOCAL_LENGTH = 100;
+   public static float FOCAL_LENGTH = 500;
 //    private static final float[] ORIGIN = {};
     
     public static float getX()
@@ -56,8 +58,8 @@ public class Camera
     
     public static void translateCameraFrameX(float translateX)
     {
-        Camera.x += (float) Math.cos(angle) * translateX;
-        Camera.z += (float) Math.sin(angle) * translateX;
+        Camera.x += (float) Math.cos(angle / 180 * Math.PI) * translateX;
+        Camera.z += (float) Math.sin(angle / 180 * Math.PI) * translateX;
     }
     
 //    public static void translateCameraFrameY(float translateY)
@@ -67,8 +69,8 @@ public class Camera
     
     public static void translateCameraFrameZ(float translateZ)
     {
-        Camera.z += (float) Math.cos(angle) * translateZ;
-        Camera.x += (float) Math.sin(angle) * translateZ;
+        Camera.x += (float) Math.cos((.5 * Math.PI) + angle / 180 * Math.PI) * translateZ;
+        Camera.z += (float) Math.sin((.5 * Math.PI) + angle / 180 * Math.PI) * translateZ;
     }
     
     public static void rotate(float angle)
@@ -104,24 +106,23 @@ public class Camera
     
     public static float[] project(float x, float y, float z)
     {
-        float[] position = positionCameraFrame(x, y, z);
-        
+        float[] positionCameraFrame = positionCameraFrame(x, y, z);
         float[] screenCoordinates = new float[2];
         
-        screenCoordinates[0] = (position[0] - Camera.x) * (FOCAL_LENGTH / (position[2] - Camera.z + FOCAL_LENGTH)) + 960;
-        screenCoordinates[1] = 540 - (position[1] - Camera.y) * (FOCAL_LENGTH / (position[2] - Camera.z + FOCAL_LENGTH));
+        screenCoordinates[0] = positionCameraFrame[0] * FOCAL_LENGTH / positionCameraFrame[2] + 960;
+        screenCoordinates[1] = 540 - positionCameraFrame[1] * FOCAL_LENGTH / positionCameraFrame[2];
         
         return screenCoordinates;
     }
     
     public static float[] positionCameraFrame(float x, float y, float z)
     {
-        float[] cameraFrame = new float[3];
+        float[] position = new float[3];
         
-        cameraFrame[0] = (float) ((x - Camera.x) * Math.cos(Camera.angle / 180 * Math.PI) - (z - Camera.z) * Math.sin(Camera.angle / 180 * Math.PI));
-        cameraFrame[1] = y;
-        cameraFrame[2] = (float) ((z - Camera.z) * Math.cos(Camera.angle / 180 * Math.PI) + (x - Camera.x) * Math.sin(Camera.angle / 180 * Math.PI));
+        position[0] = (float) ((z - Camera.z) * Math.sin(angle / 180 * Math.PI) + (x - Camera.x) * Math.cos(angle / 180 * Math.PI));
+        position[1] = y;
+        position[2] = (float) ((z - Camera.z) * Math.cos(angle / 180 * Math.PI) - (x - Camera.x) * Math.sin(angle / 180 * Math.PI));
         
-        return cameraFrame;
+        return position;
     }
 }

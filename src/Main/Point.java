@@ -26,7 +26,7 @@ public class Point extends ThreeDObject implements BasicMethods
     
     public void display(PApplet applet)
     {
-        if (Camera.positionCameraFrame(this.getX(), this.getY(), this.getZ())[2] >= 0)
+        if (Camera.positionCameraFrame(this.getX(), this.getY(), this.getZ())[2] >= Camera.FOCAL_LENGTH)
         {
             float x = this.getX();
             float y = this.getY();
