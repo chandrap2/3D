@@ -16,17 +16,17 @@ public class Point extends ThreeDObject implements BasicMethods
 {
     public Point()
     {
-        super(0, 0, 0);
+        super(0, 0, 0, "l");
     }
     
-    public Point(float x, float y, float z)
+    public Point(float x, float y, float z, String name)
     {
-        super(x, y, z);
+        super(x, y, z, name);
     }
     
     public void display(PApplet applet)
     {
-        if (Camera.positionCameraFrame(this.getX(), this.getY(), this.getZ())[2] >= Camera.FOCAL_LENGTH)
+//        if (Camera.positionCameraFrame(this.getX(), this.getY(), this.getZ())[2] >= Camera.FOCAL_LENGTH)
         {
             float x = this.getX();
             float y = this.getY();
@@ -35,8 +35,12 @@ public class Point extends ThreeDObject implements BasicMethods
             float screenX = Camera.project(x, y, z)[0];
             float screenY = Camera.project(x, y, z)[1];
 
-            applet.point(screenX, screenY);
+            applet.rect(screenX, screenY, 5, 5);
         }
+//        else
+//        {
+//            System.out.println(name);
+//        }
     }
     
     public float getX()

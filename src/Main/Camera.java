@@ -11,15 +11,15 @@ package Main;
  */
 public class Camera
 {
+    public static float FOCAL_LENGTH = 500;
+    
+    public static int SCREEN_WIDTH = 1000;
+    public static int SCREEN_LENGTH = 1000;
+    
     public static float x = 0;
     public static float y = 0;
     public static float z = 0;
-    
     public static float angle = 0;
-    
-//    private static final float FOCAL_LENGTH = 100;
-   public static float FOCAL_LENGTH = 500;
-//    private static final float[] ORIGIN = {};
     
     public static float getX()
     {
@@ -109,8 +109,8 @@ public class Camera
         float[] positionCameraFrame = positionCameraFrame(x, y, z);
         float[] screenCoordinates = new float[2];
         
-        screenCoordinates[0] = positionCameraFrame[0] * FOCAL_LENGTH / positionCameraFrame[2] + 960;
-        screenCoordinates[1] = 540 - positionCameraFrame[1] * FOCAL_LENGTH / positionCameraFrame[2];
+        screenCoordinates[0] = positionCameraFrame[0] * FOCAL_LENGTH / positionCameraFrame[2] + (float) SCREEN_WIDTH / 2;
+        screenCoordinates[1] = (float) SCREEN_LENGTH / 2 - positionCameraFrame[1] * FOCAL_LENGTH / positionCameraFrame[2];
         
         return screenCoordinates;
     }
@@ -121,7 +121,7 @@ public class Camera
         
         position[0] = (float) ((z - Camera.z) * Math.sin(angle / 180 * Math.PI) + (x - Camera.x) * Math.cos(angle / 180 * Math.PI));
         position[1] = y;
-        position[2] = (float) ((z - Camera.z) * Math.cos(angle / 180 * Math.PI) - (x - Camera.x) * Math.sin(angle / 180 * Math.PI));
+        position[2] = (float) ((z - Camera.z) * Math.cos(angle / 180 * Math.PI) - (x - Camera.x) * Math.sin(angle / 180 * Math.PI)) < FOCAL_LENGTH ? 0 : (float) ((z - Camera.z) * Math.cos(angle / 180 * Math.PI) - (x - Camera.x) * Math.sin(angle / 180 * Math.PI));
         
         return position;
     }

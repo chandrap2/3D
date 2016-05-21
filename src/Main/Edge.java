@@ -12,26 +12,37 @@ import processing.core.PApplet;
  * @author s-pandianc
  */
 public class Edge implements BasicMethods {
+    private String name;
     private Point p1;
     private Point p2;
     
-    public Edge(Point p1, Point p2)
+    public Edge(Point p1, Point p2, String name)
     {
+        this.name = name;
         this.p1 = p1;
         this.p2 = p2;
     }
 
     @Override
     public void display(PApplet applet) {
-        if ((Camera.positionCameraFrame(p1.getX(), p1.getY(), p1.getZ())[2] >= Camera.FOCAL_LENGTH) || (Camera.positionCameraFrame(p2.getX(), p2.getY(), p2.getZ())[2] >= Camera.FOCAL_LENGTH))
+//        if ((Camera.positionCameraFrame(p1.getX(), p1.getY(), p1.getZ())[2] >= Camera.FOCAL_LENGTH) && (Camera.positionCameraFrame(p2.getX(), p2.getY(), p2.getZ())[2] >= Camera.FOCAL_LENGTH))
         {    
             float[] pointOneScreenCoor = Camera.project(p1.getX(), p1.getY(), p1.getZ());
             float[] pointTwoScreenCoor = Camera.project(p2.getX(), p2.getY(), p2.getZ());
 
             applet.line(pointOneScreenCoor[0], pointOneScreenCoor[1], pointTwoScreenCoor[0], pointTwoScreenCoor[1]);
         }
+//        else
+//        {
+//            System.out.println(name);
+//        }
     }
-
+    
+    public String getName()
+    {
+        return name;
+    }
+    
     @Override
     public float getX() {
         return (p1.getX() + p2.getX()) / 2;

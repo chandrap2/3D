@@ -11,11 +11,19 @@ package Main;
  */
 public class ThreeDObject {
     protected float[] positionCoordinates = new float[3];
+    protected String name;
     
-    public ThreeDObject(float x, float y, float z)
+    public ThreeDObject(float x, float y, float z, String name)
     {
         positionCoordinates[0] = x;
         positionCoordinates[1] = y;
         positionCoordinates[2] = z;
+        
+        this.name = name;
+    }
+    
+    public String getName()
+    {
+        return name;
     }
 }
