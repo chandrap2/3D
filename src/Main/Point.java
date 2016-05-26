@@ -22,6 +22,10 @@ public class Point extends ThreeDObject implements BasicMethods
     public Point(float x, float y, float z, String name)
     {
         super(x, y, z, name);
+        
+        this.positionCoordinates[0] *= 100;        
+        this.positionCoordinates[1] *= 100;        
+        this.positionCoordinates[2] *= 100;        
     }
     
     public void display(PApplet applet)

@@ -5,6 +5,8 @@
  */
 package Main;
 
+import processing.core.PApplet;
+
 /**
  *
  * @author chand_000
@@ -13,6 +15,6 @@ public class Main
 {
     public static void main(String[] args)
     {
-        MySketch.main("Main.MySketch");
+        PApplet.main("Main.MySketch"); 
     }    
 }
