@@ -25,7 +25,7 @@ public class Edge implements BasicMethods {
 
     @Override
     public void display(PApplet applet) {
-//        if ((Camera.positionCameraFrame(p1.getX(), p1.getY(), p1.getZ())[2] >= Camera.FOCAL_LENGTH) && (Camera.positionCameraFrame(p2.getX(), p2.getY(), p2.getZ())[2] >= Camera.FOCAL_LENGTH))
+//        if ((Camera.returnPositionCameraFrame(p1.getX(), p1.getY(), p1.getZ())[2] >= Camera.FOCAL_LENGTH) && (Camera.returnPositionCameraFrame(p2.getX(), p2.getY(), p2.getZ())[2] >= Camera.FOCAL_LENGTH))
         {    
             float[] pointOneScreenCoor = Camera.project(p1.getX(), p1.getY(), p1.getZ());
             float[] pointTwoScreenCoor = Camera.project(p2.getX(), p2.getY(), p2.getZ());

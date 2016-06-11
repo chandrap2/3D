@@ -21,30 +21,19 @@ public class Point extends ThreeDObject implements BasicMethods
     
     public Point(float x, float y, float z, String name)
     {
-        super(x, y, z, name);
-        
-        this.positionCoordinates[0] *= 100;        
-        this.positionCoordinates[1] *= 100;        
-        this.positionCoordinates[2] *= 100;        
+        super(x, y, z, name);  
     }
     
     public void display(PApplet applet)
     {
-//        if (Camera.positionCameraFrame(this.getX(), this.getY(), this.getZ())[2] >= Camera.FOCAL_LENGTH)
-        {
-            float x = this.getX();
-            float y = this.getY();
-            float z = this.getZ();
+        float x = this.getX();
+        float y = this.getY();
+        float z = this.getZ();
 
-            float screenX = Camera.project(x, y, z)[0];
-            float screenY = Camera.project(x, y, z)[1];
+        float screenX = Camera.project(x, y, z)[0];
+        float screenY = Camera.project(x, y, z)[1];
 
-            applet.rect(screenX, screenY, 5, 5);
-        }
-//        else
-//        {
-//            System.out.println(name);
-//        }
+        applet.rect(screenX, screenY, 5, 5);
     }
     
     public float getX()
