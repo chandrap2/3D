@@ -82,43 +82,43 @@ public class MySketch extends PApplet
         {
             if (key == 'w')
             {
-                Camera.translate(0, 0, 20);
+                Camera.moveInCameraDirection(20, (byte) 1);
             }
-                        
+            
             if (key == 's')
             {
-                Camera.translate(0, 0, -20);
+                Camera.moveInCameraDirection(-20, (byte) 1);
             }
-                        
-            if (key == 'a')
-            {
-                Camera.translate(-20, 0, 0);
-            }
-                        
+            
             if (key == 'd')
             {
-                Camera.translate(20, 0, 0);
+                Camera.moveInCameraDirection(20, (byte) 0);
+            }
+            
+            if (key == 'a')
+            {
+                Camera.moveInCameraDirection(-20, (byte) 0);
             }
                         
             if (keyCode == LEFT)
             {
-                Camera.rotateCameraLocal(0, 0, 2);
+                Camera.rotateCameraLocal(0, 2, 0);
             }
 
             if (keyCode == RIGHT)
             {
-                Camera.rotateCameraLocal(0, 0, -2);
+                Camera.rotateCameraLocal(0, -2, 0);
             }   
             
-            if (keyCode == UP)
-            {
-                Camera.rotateCameraLocal(2, 0, 0);
-            }
-
-            if (keyCode == DOWN)
-            {
-                Camera.rotateCameraLocal(-2, 0, 0);
-            } 
+//            if (keyCode == UP)
+//            {
+//                Camera.rotateCameraLocal(2, 0, 0);
+//            }
+//
+//            if (keyCode == DOWN)
+//            {
+//                Camera.rotateCameraLocal(-2, 0, 0);
+//            }
        }
         
 //        /*        
@@ -159,9 +159,9 @@ public class MySketch extends PApplet
 //            points.get(j).display(this);
 //        }
         
-//        line(Camera.SCREEN_WIDTH - 200, Camera.SCREEN_LENGTH - 100, Camera.SCREEN_WIDTH - 200, Camera.SCREEN_LENGTH - 200);
-//        stroke(0, 255, 0);
-//        line(Camera.SCREEN_WIDTH - 200, Camera.SCREEN_LENGTH - 100, Camera.SCREEN_WIDTH - 200 - (float) Math.sin(Camera.getyAngle() / 180 * Math.PI) * 50, Camera.SCREEN_LENGTH - 100 - (float) Math.cos(Camera.getyAngle() / 180 * Math.PI) * 50);
-//        stroke(255);
+        line(Camera.SCREEN_WIDTH - 200, Camera.SCREEN_LENGTH - 100, Camera.SCREEN_WIDTH - 200, Camera.SCREEN_LENGTH - 200);
+        stroke(0, 255, 0);
+        line(Camera.SCREEN_WIDTH - 200, Camera.SCREEN_LENGTH - 100, Camera.SCREEN_WIDTH - 200 - (float) Math.sin(Camera.getAngles()[1]/ 180 * Math.PI) * 50, Camera.SCREEN_LENGTH - 100 - (float) Math.cos(Camera.getAngles()[1] / 180 * Math.PI) * 50);
+        stroke(255);
     }
 }
